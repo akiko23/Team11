@@ -1,4 +1,4 @@
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 from aiogram.utils.exceptions import ButtonDataInvalid
 
 
@@ -47,17 +47,20 @@ def questions(possible_questions):
 
 
 def questions_categories(data):
-    keyboard = InlineKeyboardMarkup()
+    keyboard = ReplyKeyboardMarkup()
     for i, c in enumerate(data):
         try:
-            keyboard.inline_keyboard.append([
-                InlineKeyboardButton(text=c, callback_data=f's-{c}')
-            ])
+            if c != 'NaHn':
+                keyboard.keyboard.append([
+                    KeyboardButton(text=c)
+                ])
+            else:
+                continue
         except IndexError:
             continue
-    keyboard.inline_keyboard.append(
+    keyboard.keyboard.append(
         [
-            InlineKeyboardButton(text='В главное меню', callback_data='to_main_menu')
+            KeyboardButton(text='В главное меню', callback_data='to_main_menu')
         ]
     )
     return keyboard

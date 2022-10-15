@@ -11,7 +11,7 @@ class Database:
             return self.cursor.execute(request, *args)
 
     def user_exists(self, user_id):
-        res = self.request_to_database("SELECT `user_id` FROM users WHERE user_id=?", (user_id,)).fetchall()
+        res = self.request_to_database("SELECT * FROM users WHERE user_id=?", (user_id,)).fetchall()
         return bool(len(res))
 
     def add_user(self, user_id):
@@ -29,7 +29,7 @@ class Database:
     def get_all_user_params(self, user_id):
         return self.request_to_database("SELECT * FROM users WHERE user_id=?", (user_id,)).fetchall()[0]
 
-    def check_param_on_none(self, user_id):
-        c = self.get_all_user_params(user_id)
-        return any([c[i] is not None for i in range(len(c))])
 
+db = Database('database.db')
+# print(db.check_param_on_none('1155862966'))
+db.user_exists('818315135')
