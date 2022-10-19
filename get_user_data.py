@@ -11,7 +11,7 @@ from states import QuestionsToUser
 
 
 def sort_by_user_os(x, user_os):
-    if 'OS' in x and (x['OS'] == user_os or x['OS'] == 'All' or x['OS'] is None):
+    if 'OS' in x and (x['OS'] in [user_os, 'All', None]):
         return True
     else:
         return False
